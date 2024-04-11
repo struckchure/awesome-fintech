@@ -3,6 +3,7 @@ This project was generated with [Blnk](https://docs.awesome.fintech.org.xyx/whit
 
 # Setup
 ```sh
+$ docker compose up -d
 $ go run ./cmd db up
 $ go run ./cmd server up
 ```
