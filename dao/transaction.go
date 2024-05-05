@@ -38,20 +38,14 @@ func (l *TransactionDao) List(dto dto.ListTransactionDto) (transactions []models
 func (l *TransactionDao) Create(dto dto.CreateTransactionDto) (*models.Transaction, error) {
 	meta, _ := json.Marshal(dto.Meta)
 	transaction := models.Transaction{
-		AllowOverdraft:         *dto.AllowOverdraft,
-		Source:                 dto.Source,
-		Destination:            dto.Destination,
-		Reference:              dto.Reference,
-		Amount:                 dto.Amount,
-		Currency:               dto.Currency,
-		Description:            *dto.Description,
-		Status:                 *dto.Status,
-		ScheduledFor:           *dto.ScheduledFor,
-		RiskToleranceThreshold: *dto.RiskToleranceThreshold,
-		RiskScore:              *dto.RiskScore,
-		Hash:                   *dto.Hash,
-		GroupIds:               dto.GroupIds,
-		Meta:                   meta,
+		AllowOverdraft: *dto.AllowOverdraft,
+		Source:         dto.Source,
+		Destination:    dto.Destination,
+		Reference:      dto.Reference,
+		Amount:         dto.Amount,
+		Currency:       dto.Currency,
+		Status:         *dto.Status,
+		Meta:           meta,
 	}
 
 	l.db.Create(&transaction)

@@ -41,18 +41,9 @@ func (l *BalanceDao) Create(dto dto.CreateBalanceDto) (*models.Balance, error) {
 		Ledger: models.Ledger{
 			Id: dto.LedgerId,
 		},
-		TotalBalance:          *dto.TotalBalance,
-		InflightBalance:       *dto.InflightBalance,
-		CreditBalance:         *dto.CreditBalance,
-		DebitBalance:          *dto.DebitBalance,
-		InflightCreditBalance: *dto.InflightCreditBalance,
-		InflightDebitBalance:  *dto.InflightDebitBalance,
-		InflighExpiresAt:      *dto.InflighExpiresAt,
-		CurrencyMultiplier:    *dto.CurrencyMultiplier,
-		Currency:              dto.Currency,
-		Version:               *dto.Version,
-		Indicator:             *dto.Indicator,
-		Meta:                  meta,
+		TotalBalance: *dto.TotalBalance,
+		Currency:     dto.Currency,
+		Meta:         meta,
 	}
 
 	l.db.Create(&balance)

@@ -13,18 +13,9 @@ type Balance struct {
 	UpdatedAt time.Time      `json:"updatedAt"`
 	DeletedAt gorm.DeletedAt `json:"deletedAt" gorm:"index"`
 
-	LedgerId              string         `json:"ledgerId"`
-	Ledger                Ledger         `json:"ledger,omitempty" gorm:"foreignKey:LedgerId"`
-	TotalBalance          int64          `json:"totalBalance" gorm:"default:0"`
-	InflightBalance       int64          `json:"inflightBalance" gorm:"default:0"`
-	CreditBalance         int64          `json:"creditBalance" gorm:"default:0"`
-	DebitBalance          int64          `json:"debitBalance" gorm:"default:0"`
-	InflightCreditBalance int64          `json:"inflightCreditBalance" gorm:"default:0"`
-	InflightDebitBalance  int64          `json:"inflightDebitBalance" gorm:"default:0"`
-	InflighExpiresAt      time.Time      `json:"inflightExpiresAt"`
-	CurrencyMultiplier    int64          `json:"preceision"`
-	Currency              string         `json:"currency"`
-	Version               int64          `json:"version"`
-	Indicator             string         `json:"indicator"`
-	Meta                  datatypes.JSON `json:"meta"`
+	Ledger       Ledger         `json:"ledger,omitempty" gorm:"foreignKey:LedgerId"`
+	LedgerId     string         `json:"ledgerId"`
+	TotalBalance int64          `json:"totalBalance" gorm:"default:0"`
+	Currency     string         `json:"currency"`
+	Meta         datatypes.JSON `json:"meta"`
 }
