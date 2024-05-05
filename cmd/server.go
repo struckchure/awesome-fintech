@@ -1,34 +1,15 @@
 package main
 
 import (
-	"context"
-
 	"github.com/gofiber/fiber/v3"
 	"github.com/spf13/cobra"
 	"go.uber.org/fx"
 
 	"awesome.fintech.org/core"
+	"awesome.fintech.org/dao"
 	"awesome.fintech.org/handlers"
+	"awesome.fintech.org/services"
 )
-
-func startServer(lc fx.Lifecycle) *fiber.App {
-	server := core.NewServer()
-
-	handlers.NewRootHandler(server)
-
-	lc.Append(fx.Hook{
-		OnStart: func(ctx context.Context) error {
-			go server.Listen(":3000")
-
-			return nil
-		},
-		OnStop: func(ctx context.Context) error {
-			return server.Shutdown()
-		},
-	})
-
-	return server
-}
 
 func ServerRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -41,7 +22,23 @@ func ServerRootCmd() *cobra.Command {
 		Short: "Start server",
 		Run: func(cmd *cobra.Command, args []string) {
 			fx.New(
-				fx.Provide(startServer),
+				fx.Provide(core.NewDatabaseConnection),
+
+				fx.Provide(dao.NewLedgerDao),
+				fx.Provide(services.NewLedgerService),
+				fx.Provide(handlers.NewLedgerHandler),
+
+				fx.Provide(dao.NewBalanceDao),
+				fx.Provide(services.NewBalanceService),
+				fx.Provide(handlers.NewBalanceHandler),
+
+				fx.Provide(dao.NewTransactionDao),
+				fx.Provide(services.NewTransactionService),
+				fx.Provide(handlers.NewTransactionHandler),
+
+				fx.Provide(core.NewServer),
+
+				fx.Invoke(handlers.NewRootHandler),
 				fx.Invoke(func(*fiber.App) {}),
 			).Run()
 		},

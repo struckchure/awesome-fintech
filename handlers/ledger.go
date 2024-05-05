@@ -37,8 +37,6 @@ func (h *LedgerHandler) Create(c fiber.Ctx) error {
 	return c.Status(200).JSON(ledgers)
 }
 
-func NewLedgerHandler() *LedgerHandler {
-	ledgerService := services.NewLedgerService()
-
+func NewLedgerHandler(ledgerService *services.LedgerService) *LedgerHandler {
 	return &LedgerHandler{ledgerService: ledgerService}
 }

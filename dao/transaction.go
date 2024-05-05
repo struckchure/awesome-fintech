@@ -3,12 +3,10 @@ package dao
 import (
 	"encoding/json"
 	"errors"
-	"log"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 
-	"awesome.fintech.org/core"
 	"awesome.fintech.org/dto"
 	"awesome.fintech.org/models"
 )
@@ -103,11 +101,6 @@ func (l *TransactionDao) Delete(dto dto.DeleteTransactionDto) error {
 	return nil
 }
 
-func NewTransactionDao() TransactionDaoInterface {
-	db, err := core.NewDatabaseConnection()
-	if err != nil {
-		log.Panicln(err)
-	}
-
+func NewTransactionDao(db *gorm.DB) TransactionDaoInterface {
 	return &TransactionDao{db: db}
 }

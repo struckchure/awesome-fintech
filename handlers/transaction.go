@@ -38,8 +38,6 @@ func (h *TransactionHandler) Refund(c fiber.Ctx) error {
 	return c.Status(201).JSON(transaction)
 }
 
-func NewTransactionHandler() *TransactionHandler {
-	transactionService := services.NewTransactionService()
-
+func NewTransactionHandler(transactionService *services.TransactionService) *TransactionHandler {
 	return &TransactionHandler{transactionService: transactionService}
 }

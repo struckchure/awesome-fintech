@@ -13,6 +13,15 @@ type BalanceHandler struct {
 	balanceService *services.BalanceService
 }
 
+func (h *BalanceHandler) List(c fiber.Ctx) error {
+	balance, err := h.balanceService.List(dto.ListBalanceDto{})
+	if err != nil {
+		return c.Status(400).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	return c.Status(200).JSON(balance)
+}
+
 func (h *BalanceHandler) Create(c fiber.Ctx) error {
 	var dto dto.CreateBalanceDto
 	err := json.Unmarshal(c.Body(), &dto)
@@ -38,8 +47,6 @@ func (h *BalanceHandler) Get(c fiber.Ctx) error {
 	return c.Status(201).JSON(balance)
 }
 
-func NewBalanceHandler() *BalanceHandler {
-	balanceService := services.NewBalanceService()
-
+func NewBalanceHandler(balanceService *services.BalanceService) *BalanceHandler {
 	return &BalanceHandler{balanceService: balanceService}
 }

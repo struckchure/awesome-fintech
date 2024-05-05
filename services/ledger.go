@@ -18,8 +18,8 @@ func (s *LedgerService) Create(dto dto.CreateLedgerDto) (*models.Ledger, error) 
 	return s.ledgerDao.Create(dto)
 }
 
-func NewLedgerService() *LedgerService {
+func NewLedgerService(ledgerDao dao.LedgerDaoInterface) *LedgerService {
 	return &LedgerService{
-		ledgerDao: dao.NewLedgerDao(),
+		ledgerDao: ledgerDao,
 	}
 }

@@ -3,12 +3,10 @@ package dao
 import (
 	"encoding/json"
 	"errors"
-	"log"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 
-	"awesome.fintech.org/core"
 	"awesome.fintech.org/dto"
 	"awesome.fintech.org/models"
 )
@@ -96,11 +94,6 @@ func (l *LedgerDao) Delete(dto dto.DeleteLedgerDto) error {
 	return nil
 }
 
-func NewLedgerDao() LedgerDaoInterface {
-	db, err := core.NewDatabaseConnection()
-	if err != nil {
-		log.Panicln(err)
-	}
-
+func NewLedgerDao(db *gorm.DB) LedgerDaoInterface {
 	return &LedgerDao{db: db}
 }

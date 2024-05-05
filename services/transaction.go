@@ -11,17 +11,17 @@ import (
 )
 
 type TransactionService struct {
-	balanceDao dao.TransactionDaoInterface
+	transactionDao dao.TransactionDaoInterface
 }
 
 func (s *TransactionService) Record(args dto.CreateTransactionDto) (*models.Transaction, error) {
 	args.Reference = uuid.NewString()
 
-	return s.balanceDao.Create(args)
+	return s.transactionDao.Create(args)
 }
 
 func (s *TransactionService) Refund(args dto.GetTransactionDto) (*models.Transaction, error) {
-	transaction, err := s.balanceDao.Get(args)
+	transaction, err := s.transactionDao.Get(args)
 	if err != nil {
 		return nil, err
 	}
@@ -55,8 +55,8 @@ func (s *TransactionService) Refund(args dto.GetTransactionDto) (*models.Transac
 	return refundTransaction, nil
 }
 
-func NewTransactionService() *TransactionService {
+func NewTransactionService(transactionDao dao.TransactionDaoInterface) *TransactionService {
 	return &TransactionService{
-		balanceDao: dao.NewTransactionDao(),
+		transactionDao: transactionDao,
 	}
 }
