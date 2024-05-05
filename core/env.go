@@ -26,5 +26,5 @@ var (
 	DB_HOST      = getEnv("DB_HOST")
 	DB_PORT      = getEnv("DB_PORT")
 	DB_SSL_MODE  = getEnvDefault("DB_SSL_MODE", "disable")
-	DB_TIME_ZONE = getEnvDefault("DB_TIME_ZONE", "disable")
+	DB_TIME_ZONE = getEnvDefault("DB_TIME_ZONE", "Africa/Lagos")
 )
