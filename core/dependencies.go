@@ -1,6 +1,8 @@
 package core
 
 import (
+	"awesome.fintech.org/core/clients"
+	"awesome.fintech.org/core/constants"
 	"awesome.fintech.org/dao"
 	"awesome.fintech.org/handlers"
 	"awesome.fintech.org/services"
@@ -10,7 +12,11 @@ import (
 
 func SetupDependencies() {
 	fx.New(
+		fx.Provide(constants.NewEnv),
+
 		fx.Provide(NewDatabaseConnection),
+		fx.Provide(clients.NewRabbitMQ),
+		fx.Provide(clients.NewRabbitMQConnection),
 
 		fx.Provide(dao.NewLedgerDao),
 		fx.Provide(dao.NewBalanceDao),

@@ -7,11 +7,12 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
+	"awesome.fintech.org/core/constants"
 	"awesome.fintech.org/models"
 )
 
 func RunMigrations() {
-	db, _ := NewDatabaseConnection()
+	db, _ := NewDatabaseConnection(constants.NewEnv())
 
 	err := db.AutoMigrate(
 		models.Balance{},
@@ -25,10 +26,10 @@ func RunMigrations() {
 	log.Println("Migrations Successfully!")
 }
 
-func NewDatabaseConnection() (*gorm.DB, error) {
+func NewDatabaseConnection(env *constants.Env) (*gorm.DB, error) {
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
-		DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT, DB_SSL_MODE, DB_TIME_ZONE,
+		env.DB_HOST, env.DB_USER, env.DB_PASSWORD, env.DB_NAME, env.DB_PORT, env.DB_SSL_MODE, env.DB_TIME_ZONE,
 	)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
