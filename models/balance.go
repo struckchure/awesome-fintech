@@ -13,9 +13,10 @@ type Balance struct {
 	UpdatedAt time.Time      `json:"updatedAt"`
 	DeletedAt gorm.DeletedAt `json:"deletedAt" gorm:"index"`
 
-	Ledger       Ledger         `json:"ledger,omitempty" gorm:"foreignKey:LedgerId"`
-	LedgerId     string         `json:"ledgerId"`
-	TotalBalance int64          `json:"totalBalance" gorm:"default:0"`
-	Currency     string         `json:"currency"`
-	Meta         datatypes.JSON `json:"meta"`
+	Ledger         Ledger         `json:"ledger,omitempty" gorm:"foreignKey:LedgerId"`
+	LedgerId       string         `json:"ledgerId"`
+	AllowOverdraft bool           `json:"allowOverdraft" gorm:"default:false"`
+	TotalBalance   int64          `json:"totalBalance" gorm:"default:0"`
+	Currency       string         `json:"currency"`
+	Meta           datatypes.JSON `json:"meta"`
 }
