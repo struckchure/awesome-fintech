@@ -9,16 +9,7 @@ import (
 )
 
 func main() {
-	rootCmd := &cobra.Command{
-		Short: `
-		awesome-fintech
-		------------------------------
-		This project was bootstrap with awesome.fintech.org, Open Source Ledger Framework,
-		built to support core fintech features and scale seemlessly.
-		
-		https://docs.awesome.fintech.orgserver.xyz
-		`,
-	}
+	rootCmd := &cobra.Command{}
 
 	rootCmd.AddCommand(cmd.DatabaseRootCmd())
 	rootCmd.AddCommand(cmd.ServerRootCmd())
