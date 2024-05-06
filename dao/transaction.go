@@ -3,6 +3,7 @@ package dao
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -37,18 +38,23 @@ func (l *TransactionDao) List(dto dto.ListTransactionDto) (transactions []models
 // Create implements TransactionDaoInterface.
 func (l *TransactionDao) Create(dto dto.CreateTransactionDto) (*models.Transaction, error) {
 	meta, _ := json.Marshal(dto.Meta)
+
+	fmt.Printf("%+v\n", dto)
+
 	transaction := models.Transaction{
-		AllowOverdraft: *dto.AllowOverdraft,
-		Source:         dto.Source,
-		Destination:    dto.Destination,
-		Reference:      dto.Reference,
-		Amount:         dto.Amount,
-		Currency:       dto.Currency,
-		Status:         *dto.Status,
-		Meta:           meta,
+		Source:      dto.Source,
+		Destination: dto.Destination,
+		Reference:   dto.Reference,
+		Amount:      dto.Amount,
+		Currency:    dto.Currency,
+		Status:      dto.Status,
+		Meta:        meta,
 	}
 
-	l.db.Create(&transaction)
+	err := l.db.Create(&transaction).Error
+	if err != nil {
+		return nil, err
+	}
 
 	return &transaction, nil
 }

@@ -14,14 +14,13 @@ type Transaction struct {
 	UpdatedAt time.Time      `json:"updatedAt"`
 	DeletedAt gorm.DeletedAt `json:"deletedAt" gorm:"index"`
 
-	AllowOverdraft bool           `json:"allowOverdraft" gorm:"default:false"`
-	Source         string         `json:"source"`
-	Destination    string         `json:"destination"`
-	Reference      string         `json:"reference"`
-	Amount         int64          `json:"amount"`
-	Currency       string         `json:"currency"`
-	Status         string         `json:"status" gorm:"default:Pending"`
-	Meta           datatypes.JSON `json:"meta,omitempty"`
+	Source      string         `json:"source"`
+	Destination string         `json:"destination"`
+	Reference   string         `json:"reference"`
+	Amount      int64          `json:"amount"`
+	Currency    string         `json:"currency"`
+	Status      string         `json:"status" gorm:"default:Pending"`
+	Meta        datatypes.JSON `json:"meta,omitempty"`
 }
 
 func (transaction *Transaction) ToJSON() ([]byte, error) {
