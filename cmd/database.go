@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"awesome.fintech.org/core"

@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"awesome.fintech.org/cmd"
 	"github.com/spf13/cobra"
 )
 
@@ -19,8 +20,8 @@ func main() {
 		`,
 	}
 
-	rootCmd.AddCommand(DatabaseRootCmd())
-	rootCmd.AddCommand(ServerRootCmd())
+	rootCmd.AddCommand(cmd.DatabaseRootCmd())
+	rootCmd.AddCommand(cmd.ServerRootCmd())
 
 	if err := rootCmd.Execute(); err != nil {
 		log.Println(err)
