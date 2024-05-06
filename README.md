@@ -1,13 +1,15 @@
 # awesome-fintech
-This project was generated with [Blnk](https://docs.awesome.fintech.org.xyx/white-paper).
 
 # Setup
+
 ```sh
 $ docker compose up -d
-$ go run ./cmd db up
-$ go run ./cmd server up
+$ go run . db up
+$ go run . server up
 ```
+
 If it all checks out, you should have this.
+
 ```
 [Fx] PROVIDE    *fiber.App <= main.startServer()
 [Fx] PROVIDE    fx.Lifecycle <= go.uber.org/fx.New.func1()
@@ -20,10 +22,10 @@ If it all checks out, you should have this.
 [Fx] HOOK OnStart               main.startServer.func1() called by main.startServer ran successfully in 4.292µs
 [Fx] RUNNING
 
-    _______ __             
+    _______ __
    / ____(_) /_  ___  _____
   / /_  / / __ \/ _ \/ ___/
- / __/ / / /_/ /  __/ /    
+ / __/ / / /_/ /  __/ /
 /_/   /_/_.___/\___/_/          v3.0.0-beta.2
 --------------------------------------------------
 INFO Server started on:         http://127.0.0.1:3000 (bound on host 0.0.0.0 and port 3000)
