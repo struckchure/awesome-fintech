@@ -1,5 +1,4 @@
 # awesome-fintech
-This project was generated with [Blnk](https://docs.awesome.fintech.org.xyx/white-paper).
 
 # Setup
 ```sh
